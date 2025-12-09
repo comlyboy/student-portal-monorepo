@@ -58,6 +58,12 @@
     },
     {
       "path": "./projects/global-search/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/shared-ui/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/shared-ui/tsconfig.spec.json"
     }
   ]
 }
