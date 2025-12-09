@@ -1,1 +1,8 @@
-export const environment = {};
+export const environment = {
+	firebase: {
+		apiKey: "",
+		authDomain: "",
+		projectId: "",
+		appId: "",
+	}
+};
