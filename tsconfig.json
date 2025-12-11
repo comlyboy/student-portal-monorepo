@@ -16,11 +16,6 @@
 		"noImplicitAny": true,
 		"noUnusedLocals": true,
     "strictNullChecks": false,
-    "paths": {
-      "shared": [
-        "./dist/shared"
-      ]
-    },
 		"noUnusedParameters": false,
 		"allowUnreachableCode": false,
 		"noFallthroughCasesInSwitch": true,
