@@ -105,20 +105,25 @@
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "@angular/build:application",
+					"builder": "ngx-build-plus:browser",
 					"options": {
-						"browser": "projects/student-info/src/main.ts",
 						"tsConfig": "projects/student-info/tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
 							{
 								"glob": "**/*",
-								"input": "projects/student-info/public"
+								"input": "projects/student-info/public",
+								"output": "."
 							}
 						],
 						"styles": [
 							"projects/student-info/src/styles.scss"
-						]
+						],
+						"main": "projects/student-info/src/main.ts",
+						"outputPath": "dist/student-info",
+						"index": "projects/student-info/src/index.html",
+						"extraWebpackConfig": "projects/student-info/webpack.config.js",
+						"commonChunk": false
 					},
 					"configurations": {
 						"production": {
@@ -134,7 +139,8 @@
 									"maximumError": "8kB"
 								}
 							],
-							"outputHashing": "all"
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/student-info/webpack.prod.config.js"
 						},
 						"development": {
 							"optimization": false,
@@ -145,16 +151,22 @@
 					"defaultConfiguration": "production"
 				},
 				"serve": {
-					"builder": "@angular/build:dev-server",
+					"builder": "ngx-build-plus:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "student-info:build:production"
+							"buildTarget": "student-info:build:production",
+							"extraWebpackConfig": "projects/student-info/webpack.prod.config.js"
 						},
 						"development": {
 							"buildTarget": "student-info:build:development"
 						}
 					},
-					"defaultConfiguration": "development"
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4200,
+						"publicHost": "http://localhost:4200",
+						"extraWebpackConfig": "projects/student-info/webpack.config.js"
+					}
 				},
 				"extract-i18n": {
 					"builder": "@angular/build:extract-i18n"
