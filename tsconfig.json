@@ -1,52 +1,53 @@
 /* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
 /* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "experimentalDecorators": true,
+	"compileOnSave": false,
+	"compilerOptions": {
+		"strict": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"skipLibCheck": true,
+		"target": "ES2024",
+		"module": "preserve",
+		"importHelpers": true,
+		"isolatedModules": true,
+		"experimentalDecorators": true,
 		"noUnusedLocals": true,
-    "paths": {
-      "shared": [
-        "./dist/shared"
-      ]
-    },
-    "importHelpers": true,
-    "target": "ES2024",
-    "module": "preserve"
-  },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "typeCheckHostBindings": true,
-    "strictTemplates": true
-  },
-  "files": [],
-  "references": [
-    {
-      "path": "./projects/portal/tsconfig.app.json"
-    },
-    {
-      "path": "./projects/portal/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/student-info/tsconfig.app.json"
-    },
-    {
-      "path": "./projects/student-info/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/shared/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/shared/tsconfig.spec.json"
-    }
-  ]
+		"useUnknownInCatchVariables": false,
+		"paths": {
+			"shared": [
+				"./dist/shared"
+			]
+		},
+	},
+	"angularCompilerOptions": {
+		"enableI18nLegacyMessageIdFormat": false,
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"typeCheckHostBindings": true,
+		"strictTemplates": true
+	},
+	"files": [],
+	"references": [
+		{
+			"path": "./projects/portal/tsconfig.app.json"
+		},
+		{
+			"path": "./projects/portal/tsconfig.spec.json"
+		},
+		{
+			"path": "./projects/student-info/tsconfig.app.json"
+		},
+		{
+			"path": "./projects/student-info/tsconfig.spec.json"
+		},
+		{
+			"path": "./projects/shared/tsconfig.lib.json"
+		},
+		{
+			"path": "./projects/shared/tsconfig.spec.json"
+		}
+	]
 }

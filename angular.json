@@ -35,6 +35,61 @@
 						]
 					},
 					"configurations": {
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/portal/src/environments/environment.ts",
+									"with": "projects/portal/src/environments/environment.dev.ts"
+								}
+							]
+						},
+						"qa": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/portal/webpack.prod.config.js",
+							"fileReplacements": [
+								{
+									"replace": "projects/portal/src/environments/environment.ts",
+									"with": "projects/portal/src/environments/environment.qa.ts"
+								}
+							]
+						},
+						"staging": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/portal/webpack.prod.config.js",
+							"fileReplacements": [
+								{
+									"replace": "projects/portal/src/environments/environment.ts",
+									"with": "projects/portal/src/environments/environment.staging.ts"
+								}
+							]
+						},
 						"production": {
 							"budgets": [
 								{
@@ -49,15 +104,16 @@
 								}
 							],
 							"outputHashing": "all",
-							"extraWebpackConfig": "projects/portal/webpack.prod.config.js"
-						},
-						"development": {
-							"optimization": false,
-							"extractLicenses": false,
-							"sourceMap": true
+							"extraWebpackConfig": "projects/portal/webpack.prod.config.js",
+							"fileReplacements": [
+								{
+									"replace": "projects/portal/src/environments/environment.ts",
+									"with": "projects/portal/src/environments/environment.prod.ts"
+								}
+							]
 						}
 					},
-					"defaultConfiguration": "production"
+					"defaultConfiguration": "development"
 				},
 				"serve": {
 					"builder": "ngx-build-plus:dev-server",
