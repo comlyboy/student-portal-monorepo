@@ -1,12 +1,12 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { FederatedComponentDirective } from '../../../shared/src/lib/directives/federated-component.directive';
+
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+	selector: 'app-root',
+	imports: [RouterOutlet, FederatedComponentDirective],
+	templateUrl: './app.html',
+	styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('portal');
-}
+export class App { }

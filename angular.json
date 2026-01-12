@@ -28,7 +28,11 @@
 						"main": "projects/portal/src/main.ts",
 						"index": "projects/portal/src/index.html",
 						"extraWebpackConfig": "projects/portal/webpack.config.js",
-						"commonChunk": false
+						"commonChunk": true,
+						"namedChunks": false,
+						"allowedCommonJsDependencies": [
+							"@angular-architects/module-federation"
+						]
 					},
 					"configurations": {
 						"production": {
@@ -123,7 +127,11 @@
 						"outputPath": "dist/student-info",
 						"index": "projects/student-info/src/index.html",
 						"extraWebpackConfig": "projects/student-info/webpack.config.js",
-						"commonChunk": false
+						"commonChunk": true,
+						"namedChunks": true,
+						"allowedCommonJsDependencies": [
+							"@angular-architects/module-federation"
+						]
 					},
 					"configurations": {
 						"production": {
@@ -163,8 +171,8 @@
 					},
 					"defaultConfiguration": "development",
 					"options": {
-						"port": 4200,
-						"publicHost": "http://localhost:4200",
+						"port": 4201,
+						"publicHost": "http://localhost:4201",
 						"extraWebpackConfig": "projects/student-info/webpack.config.js"
 					}
 				},
