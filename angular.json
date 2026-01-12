@@ -5,141 +5,21 @@
 	"projects": {
 		"portal": {
 			"projectType": "application",
-			"schematics": {},
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
 			"root": "projects/portal",
 			"sourceRoot": "projects/portal/src",
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "ngx-build-plus:browser",
+					"builder": "@angular/build:application",
 					"options": {
-						"outputPath": "dist/portal",
+						"browser": "projects/portal/src/main.ts",
 						"tsConfig": "projects/portal/tsconfig.app.json",
-						"assets": [
-							{
-								"glob": "**/*",
-								"input": "projects/portal/public",
-								"output": "."
-							}
-						],
-						"styles": [
-							"projects/portal/src/styles.css"
-						],
-						"main": "projects/portal/src/main.ts",
-						"index": "projects/portal/src/index.html",
-						"extraWebpackConfig": "projects/portal/webpack.config.js",
-						"commonChunk": true,
-						"namedChunks": false,
-						"allowedCommonJsDependencies": [
-							"@angular-architects/module-federation"
-						]
-					},
-					"configurations": {
-						"development": {
-							"optimization": false,
-							"extractLicenses": false,
-							"sourceMap": true,
-							"fileReplacements": [
-								{
-									"replace": "projects/portal/src/environments/environment.ts",
-									"with": "projects/portal/src/environments/environment.dev.ts"
-								}
-							]
-						},
-						"qa": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "1MB"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "4kB",
-									"maximumError": "8kB"
-								}
-							],
-							"outputHashing": "all",
-							"extraWebpackConfig": "projects/portal/webpack.prod.config.js",
-							"fileReplacements": [
-								{
-									"replace": "projects/portal/src/environments/environment.ts",
-									"with": "projects/portal/src/environments/environment.qa.ts"
-								}
-							]
-						},
-						"staging": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "1MB"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "4kB",
-									"maximumError": "8kB"
-								}
-							],
-							"outputHashing": "all",
-							"extraWebpackConfig": "projects/portal/webpack.prod.config.js",
-							"fileReplacements": [
-								{
-									"replace": "projects/portal/src/environments/environment.ts",
-									"with": "projects/portal/src/environments/environment.staging.ts"
-								}
-							]
-						},
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "1MB"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "4kB",
-									"maximumError": "8kB"
-								}
-							],
-							"outputHashing": "all",
-							"extraWebpackConfig": "projects/portal/webpack.prod.config.js",
-							"fileReplacements": [
-								{
-									"replace": "projects/portal/src/environments/environment.ts",
-									"with": "projects/portal/src/environments/environment.prod.ts"
-								}
-							]
-						}
-					},
-					"defaultConfiguration": "development"
-				},
-				"serve": {
-					"builder": "ngx-build-plus:dev-server",
-					"configurations": {
-						"production": {
-							"buildTarget": "portal:build:production",
-							"extraWebpackConfig": "projects/portal/webpack.prod.config.js"
-						},
-						"development": {
-							"buildTarget": "portal:build:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4200,
-						"publicHost": "http://localhost:4200",
-						"extraWebpackConfig": "projects/portal/webpack.config.js"
-					}
-				},
-				"extract-i18n": {
-					"builder": "@angular/build:extract-i18n"
-				},
-				"test": {
-					"builder": "@angular/build:karma",
-					"options": {
-						"tsConfig": "projects/portal/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
 						"assets": [
 							{
 								"glob": "**/*",
@@ -147,9 +27,47 @@
 							}
 						],
 						"styles": [
-							"projects/portal/src/styles.css"
+							"projects/portal/src/styles.scss"
 						]
-					}
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular/build:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "portal:build:production"
+						},
+						"development": {
+							"buildTarget": "portal:build:development"
+						}
+					},
+					"defaultConfiguration": "development"
+				},
+				"test": {
+					"builder": "@angular/build:unit-test"
 				}
 			}
 		},
@@ -165,28 +83,19 @@
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "ngx-build-plus:browser",
+					"builder": "@angular/build:application",
 					"options": {
+						"browser": "projects/student-info/src/main.ts",
 						"tsConfig": "projects/student-info/tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
 							{
 								"glob": "**/*",
-								"input": "projects/student-info/public",
-								"output": "."
+								"input": "projects/student-info/public"
 							}
 						],
 						"styles": [
 							"projects/student-info/src/styles.scss"
-						],
-						"main": "projects/student-info/src/main.ts",
-						"outputPath": "dist/student-info",
-						"index": "projects/student-info/src/index.html",
-						"extraWebpackConfig": "projects/student-info/webpack.config.js",
-						"commonChunk": true,
-						"namedChunks": true,
-						"allowedCommonJsDependencies": [
-							"@angular-architects/module-federation"
 						]
 					},
 					"configurations": {
@@ -203,8 +112,7 @@
 									"maximumError": "8kB"
 								}
 							],
-							"outputHashing": "all",
-							"extraWebpackConfig": "projects/student-info/webpack.prod.config.js"
+							"outputHashing": "all"
 						},
 						"development": {
 							"optimization": false,
@@ -215,22 +123,16 @@
 					"defaultConfiguration": "production"
 				},
 				"serve": {
-					"builder": "ngx-build-plus:dev-server",
+					"builder": "@angular/build:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "student-info:build:production",
-							"extraWebpackConfig": "projects/student-info/webpack.prod.config.js"
+							"buildTarget": "student-info:build:production"
 						},
 						"development": {
 							"buildTarget": "student-info:build:development"
 						}
 					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4201,
-						"publicHost": "http://localhost:4201",
-						"extraWebpackConfig": "projects/student-info/webpack.config.js"
-					}
+					"defaultConfiguration": "development"
 				},
 				"extract-i18n": {
 					"builder": "@angular/build:extract-i18n"
