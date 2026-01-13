@@ -9,6 +9,7 @@
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
 		"skipLibCheck": true,
+		"baseUrl": ".",
 		"target": "ES2024",
 		"module": "preserve",
 		"importHelpers": true,
@@ -17,8 +18,8 @@
 		"noUnusedLocals": true,
 		"useUnknownInCatchVariables": false,
 		"paths": {
-			"shared": [
-				"./dist/shared"
+			"@shared/*": [
+				"projects/shared/src/*"
 			]
 		},
 	},

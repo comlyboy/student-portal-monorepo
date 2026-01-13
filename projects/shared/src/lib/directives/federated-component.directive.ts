@@ -23,9 +23,7 @@ export class FederatedComponentDirective implements AfterViewInit, OnDestroy {
 				loadOptions: {
 					remoteEntry: this.remoteEntry(),
 					exposedModule: this.exposedModule(),
-					type: 'module'
-				},
-				otherOptions: { ignoreCashing: false }
+				}
 			});
 
 			const component = remoteModule?.[this.componentName()];
