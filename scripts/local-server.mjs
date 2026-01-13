@@ -8,7 +8,7 @@ concurrently(
 			prefixColor: 'green'
 		},
 		{
-			command: 'ng serve student-info',
+			command: 'ng serve student-info --port 4201',
 			name: 'student-info',
 			prefixColor: 'yellow'
 		}

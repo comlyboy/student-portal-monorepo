@@ -12,16 +12,16 @@
 		"baseUrl": ".",
 		"target": "ES2024",
 		"module": "preserve",
-		"importHelpers": true,
+    "importHelpers": true,
+    "paths": {
+      "shared": [
+        "./dist/shared"
+      ]
+    },
 		"isolatedModules": true,
 		"experimentalDecorators": true,
 		"noUnusedLocals": true,
 		"useUnknownInCatchVariables": false,
-		"paths": {
-			"@shared/*": [
-				"projects/shared/src/*"
-			]
-		},
 	},
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,
@@ -32,23 +32,23 @@
 	},
 	"files": [],
 	"references": [
-		{
-			"path": "./projects/portal/tsconfig.app.json"
-		},
-		{
-			"path": "./projects/portal/tsconfig.spec.json"
-		},
-		{
-			"path": "./projects/student-info/tsconfig.app.json"
-		},
-		{
-			"path": "./projects/student-info/tsconfig.spec.json"
-		},
-		{
-			"path": "./projects/shared/tsconfig.lib.json"
-		},
-		{
-			"path": "./projects/shared/tsconfig.spec.json"
-		}
-	]
+    {
+      "path": "./projects/portal/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/portal/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/student-info/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/student-info/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/shared/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/shared/tsconfig.spec.json"
+    }
+  ]
 }
