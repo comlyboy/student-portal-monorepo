@@ -13,11 +13,11 @@
 		"target": "ES2024",
 		"module": "preserve",
     "importHelpers": true,
-    "paths": {
-      "shared": [
-        "./dist/shared"
-      ]
-    },
+		"paths": {
+			"@shared/*": [
+				"projects/shared/src/*"
+			]
+		},
 		"isolatedModules": true,
 		"experimentalDecorators": true,
 		"noUnusedLocals": true,
