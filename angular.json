@@ -42,7 +42,13 @@
 					}
 				},
 				"test": {
-					"builder": "@angular/build:unit-test"
+					"builder": "@angular/build:unit-test",
+					"options": {
+						"watch": false,
+						"reporters": [
+							"verbose"
+						]
+					}
 				},
 				"esbuild": {
 					"builder": "@angular/build:application",
@@ -140,7 +146,13 @@
 					}
 				},
 				"test": {
-					"builder": "@angular/build:unit-test"
+					"builder": "@angular/build:unit-test",
+					"options": {
+						"watch": false,
+						"reporters": [
+							"verbose"
+						]
+					}
 				},
 				"esbuild": {
 					"builder": "@angular/build:application",
@@ -223,7 +235,11 @@
 				"test": {
 					"builder": "@angular/build:unit-test",
 					"options": {
-						"tsConfig": "projects/shared/tsconfig.spec.json"
+						"tsConfig": "projects/shared/tsconfig.spec.json",
+						"watch": false,
+						"reporters": [
+							"verbose"
+						]
 					}
 				}
 			}
