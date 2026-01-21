@@ -18,42 +18,10 @@
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "@angular-architects/native-federation:build",
-					"options": {},
-					"configurations": {
-						"production": {
-							"target": "portal:esbuild:production"
-						},
-						"development": {
-							"target": "portal:esbuild:development",
-							"dev": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "@angular-architects/native-federation:build",
-					"options": {
-						"target": "portal:serve-original:development",
-						"rebuildDelay": 500,
-						"dev": true,
-						"cacheExternalArtifacts": false,
-						"port": 0
-					}
-				},
-				"test": {
-					"builder": "@angular/build:unit-test",
-					"options": {
-						"watch": false,
-						"reporters": [
-							"verbose"
-						]
-					}
-				},
-				"esbuild": {
 					"builder": "@angular/build:application",
 					"options": {
 						"browser": "projects/portal/src/main.ts",
+						"index": "projects/portal/src/index.html",
 						"tsConfig": "projects/portal/tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
@@ -64,9 +32,6 @@
 						],
 						"styles": [
 							"projects/portal/src/styles.scss"
-						],
-						"polyfills": [
-							"es-module-shims"
 						]
 					},
 					"configurations": {
@@ -83,30 +48,34 @@
 									"maximumError": "8kB"
 								}
 							],
-							"outputHashing": "all"
+							"outputHashing": "none"
 						},
 						"development": {
 							"optimization": false,
 							"extractLicenses": false,
-							"sourceMap": true
+							"sourceMap": true,
+							"outputHashing": "none"
 						}
 					},
 					"defaultConfiguration": "production"
 				},
-				"serve-original": {
+				"serve": {
 					"builder": "@angular/build:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "portal:esbuild:production"
+							"buildTarget": "portal:build:production"
 						},
 						"development": {
-							"buildTarget": "portal:esbuild:development"
+							"buildTarget": "portal:build:development"
 						}
 					},
 					"defaultConfiguration": "development",
 					"options": {
 						"port": 4200
 					}
+				},
+				"test": {
+					"builder": "@angular/build:unit-test"
 				}
 			}
 		},

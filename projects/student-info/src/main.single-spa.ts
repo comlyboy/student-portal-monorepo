@@ -12,7 +12,7 @@ const lifecycles = singleSpaAngular({
 	Router,
 	NgZone: 'noop',
 	NavigationStart,
-	template: '<app-root />',
+	template: '<student-info-root />',
 	bootstrapFunction: (appProps) => {
 		singleSpaPropsSubject.next(appProps);
 		return bootstrapApplication(App, {

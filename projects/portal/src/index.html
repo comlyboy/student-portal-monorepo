@@ -1,13 +1,31 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>Portal</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+	<meta charset="utf-8">
+	<title>Portal</title>
+	<base href="/" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.15.1/system.min.js"
+		integrity="sha512-uqwFgHHxg9qZmWJnFhtUQjSmyeWU3NByQQfx1U5DGjJ1iNfAbbgMxEDQuuxQgq2D133Cn3b5jD4cIBCPj4VKpA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/single-spa/6.0.3/es5/system/single-spa.min.js"
+		integrity="sha512-NP/vxC40D8gtwLT57QcSoUmg9gzwcP7FpingGsBJi6rfEUMDjO0YZ2xYPjDziMTnN/B8c2D3DvgNgBvYkauR1w=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script type="systemjs-importmap">
+  {
+    "imports": {
+      "student-info": "http://localhost:4201/main.js"
+    }
+  }
+  </script>
 </head>
+
 <body>
-  <app-root></app-root>
+	<portal-root></portal-root>
 </body>
+
 </html>
