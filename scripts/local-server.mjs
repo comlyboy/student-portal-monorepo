@@ -1,6 +1,6 @@
 import concurrently from 'concurrently';
 
-concurrently(
+const { result } = concurrently(
 	[
 		{
 			command: 'ng serve portal',
@@ -8,7 +8,7 @@ concurrently(
 			prefixColor: 'green'
 		},
 		{
-			command: 'ng serve student-info --port 4201',
+			command: 'ng serve student-info',
 			name: 'student-info',
 			prefixColor: 'yellow'
 		}
@@ -18,3 +18,8 @@ concurrently(
 		restartTries: 0
 	}
 );
+
+result.then().catch((error) => {
+	console.error('[concurrently failed]');
+	process.exit(1);
+});
