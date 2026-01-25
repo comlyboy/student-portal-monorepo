@@ -43,6 +43,14 @@
 							{
 								"glob": "**/*",
 								"input": "projects/portal/public"
+							},
+							{
+								"glob": "system.min.js",
+								"input": "node_modules/systemjs/dist"
+							},
+							{
+								"glob": "single-spa.min.js",
+								"input": "node_modules/single-spa/lib/es5/system"
 							}
 						],
 						"styles": [
@@ -128,7 +136,7 @@
 						"customWebpackConfig": {
 							"path": "extra-webpack.config.js",
 							"libraryName": "student-info",
-							"libraryTarget": "system",
+							"libraryTarget": "system"
 						}
 					},
 					"configurations": {
