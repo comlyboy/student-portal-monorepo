@@ -1,49 +1,74 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
+import {
+	registerApplication,
+	start,
+	unloadApplication,
+} from 'single-spa';
+
+interface AppEntry {
+	refs: number;
+	active: boolean;
+}
 
 @Injectable({ providedIn: 'root' })
-export class SingleSpaService {
-	private apps = new Map<
-		string,
-		{ app: any; refs: number; mounted: boolean }
-	>();
+export class SingleSpaLoaderService {
+	private apps = new Map<string, AppEntry>();
+	private started = false;
 
-	async mount(appName: string, host: HTMLElement): Promise<() => void> {
+	private ensureStarted() {
+		if (!this.started) {
+			start({ urlRerouteOnly: true });
+			this.started = true;
+		}
+	}
+
+	async mount(appName: string, host: HTMLElement): Promise<void> {
+		this.ensureStarted();
+
 		let entry = this.apps.get(appName);
 
 		if (!entry) {
-			const app = await (window as any).System.import(appName);
-			entry = { app, refs: 0, mounted: false };
+			entry = { refs: 0, active: false };
 			this.apps.set(appName, entry);
+
+			registerApplication({
+				name: appName,
+				app: () => (window as any).System.import(appName),
+				activeWhen: () => entry!.active,
+				customProps: {
+					domElement: host,
+				},
+			});
 		}
 
 		entry.refs++;
 
-		if (!entry.mounted) {
-			try {
-				await entry.app.bootstrap?.();
-				await entry.app.mount({ domElement: host });
-				entry.mounted = true;
-			} catch (err) {
-				console.error(`[single-spa:${appName}]`, err);
-				host.innerHTML = `<div>Failed to load ${appName}</div>`;
-			}
-		}
+		if (!entry.active) {
+			entry.active = true;
 
-		return () => this.unmount(appName);
+			// trigger single-spa reroute
+			window.dispatchEvent(new PopStateEvent('popstate'));
+		}
 	}
 
-	private async unmount(appName: string) {
+	async unmount(appName: string): Promise<void> {
 		const entry = this.apps.get(appName);
 		if (!entry) return;
 
 		entry.refs--;
 
-		if (entry.refs === 0 && entry.mounted) {
-			try {
-				await entry.app.unmount?.();
-			} finally {
-				this.apps.delete(appName);
-			}
+		if (entry.refs === 0 && entry.active) {
+			entry.active = false;
+
+			// normal unmount via activeWhen
+			window.dispatchEvent(new PopStateEvent('popstate'));
+
+			// ensure full cleanup
+			await unloadApplication(appName, {
+				waitForUnmount: true,
+			});
+
+			this.apps.delete(appName);
 		}
 	}
 }

@@ -1,5 +1,5 @@
 import { Directive, OnInit, OnDestroy, Input, ElementRef } from "@angular/core";
-import { SingleSpaService } from "../services/single-spa.service";
+import { SingleSpaLoaderService } from "../services/single-spa.service";
 
 @Directive({
 	selector: '[microApp]'
@@ -7,21 +7,19 @@ import { SingleSpaService } from "../services/single-spa.service";
 export class MicroAppDirective implements OnInit, OnDestroy {
 	@Input('microApp') appName!: string;
 
-	private cleanup?: () => void;
-
 	constructor(
 		private el: ElementRef<HTMLElement>,
-		private loader: SingleSpaService
+		private loader: SingleSpaLoaderService
 	) { }
 
 	async ngOnInit() {
-		this.cleanup = await this.loader.mount(
+		await this.loader.mount(
 			this.appName,
 			this.el.nativeElement
 		);
 	}
 
 	ngOnDestroy() {
-		this.cleanup?.();
+		this.loader.unmount(this.appName);
 	}
 }
