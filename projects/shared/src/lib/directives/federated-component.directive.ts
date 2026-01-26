@@ -1,47 +1,27 @@
-import { Directive, AfterViewInit, OnDestroy, input, ViewContainerRef } from '@angular/core';
-
-import { ModuleFederationService } from '../services/module-federation.service';
+import { Directive, OnInit, OnDestroy, Input, ElementRef } from "@angular/core";
+import { SingleSpaService } from "../services/single-spa.service";
 
 @Directive({
-	selector: '[libFederatedComponent]',
-	standalone: true
+	selector: '[microApp]'
 })
-export class FederatedComponentDirective implements AfterViewInit, OnDestroy {
+export class MicroAppDirective implements OnInit, OnDestroy {
+	@Input('microApp') appName!: string;
 
-	readonly remoteEntry = input.required<string>();
-	readonly exposedModule = input.required<string>();
-	readonly componentName = input.required<string>();
+	private cleanup?: () => void;
 
 	constructor(
-		private readonly viewContainerRef: ViewContainerRef,
-		private readonly mFService: ModuleFederationService
+		private el: ElementRef<HTMLElement>,
+		private loader: SingleSpaService
 	) { }
 
-	async ngAfterViewInit() {
-		try {
-			const remoteModule = await this.mFService.load({
-				loadOptions: {
-					remoteEntry: this.remoteEntry(),
-					exposedModule: this.exposedModule(),
-				}
-			});
-
-			const component = remoteModule?.[this.componentName()];
-			if (!component) {
-				throw new Error(`Export "${this.componentName()}" not found in remote`);
-			}
-
-			this.viewContainerRef.clear();
-			this.viewContainerRef.createComponent(component);
-
-		} catch (err) {
-			console.error('❌ Failed to mount microapp', err);
-			this.viewContainerRef.clear();
-		}
+	async ngOnInit() {
+		this.cleanup = await this.loader.mount(
+			this.appName,
+			this.el.nativeElement
+		);
 	}
 
 	ngOnDestroy() {
-		this.viewContainerRef.clear();
+		this.cleanup?.();
 	}
-
 }
